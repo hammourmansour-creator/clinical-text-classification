@@ -1,0 +1,38 @@
+Baseline vs DistilBERT comparison (Dev)
+
+Overall:
+                       accuracy  macro_f1  weighted_f1
+model                                                 
+baseline_tfidf_logreg  0.830663  0.766678     0.828002
+distilbert             0.872733  0.811665     0.870180
+
+Focus (OBJECTIVE/BACKGROUND):
+            baseline_precision  baseline_recall  baseline_f1-score  distil_precision  distil_recall  distil_f1-score  delta_precision  delta_recall  delta_f1
+OBJECTIVE             0.718768         0.539983           0.616679          0.816084       0.521044         0.636013         0.097317     -0.018939  0.019335
+BACKGROUND            0.650241         0.665700           0.657880          0.675521       0.788924         0.727832         0.025281      0.123224  0.069952
+
+Top reduced confusions:
+ true_label  pred_label  delta_count
+    RESULTS     METHODS         -303
+ BACKGROUND CONCLUSIONS         -170
+    METHODS     RESULTS         -135
+ BACKGROUND   OBJECTIVE         -133
+CONCLUSIONS  BACKGROUND         -107
+ BACKGROUND     METHODS         -106
+  OBJECTIVE CONCLUSIONS          -90
+CONCLUSIONS     METHODS          -79
+  OBJECTIVE     METHODS          -70
+    RESULTS CONCLUSIONS          -69
+
+Top increased confusions:
+ true_label  pred_label  delta_count
+  OBJECTIVE  BACKGROUND          222
+ BACKGROUND  BACKGROUND            0
+CONCLUSIONS CONCLUSIONS            0
+  OBJECTIVE   OBJECTIVE            0
+    METHODS     METHODS            0
+    RESULTS     RESULTS            0
+    RESULTS   OBJECTIVE           -1
+    RESULTS  BACKGROUND           -6
+ BACKGROUND     RESULTS          -16
+  OBJECTIVE     RESULTS          -17

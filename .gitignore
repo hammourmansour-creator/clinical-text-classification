@@ -1,0 +1,13 @@
+# Dataset (do not upload large files)
+data/raw/pubmed_20k_rct/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Virtual environments
+.env
+venv/
