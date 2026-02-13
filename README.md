@@ -1,30 +1,58 @@
-# Clinical Text Classification Mini-Pipeline (Python)
+Clinical Text Classification Mini-Pipeline (Python)
 
-End-to-end NLP text classification project using the **PubMed 20k RCT** dataset.  
-Built with a research-oriented workflow: **EDA → preprocessing → classical baseline → transformer model → evaluation + comparison**.
+End-to-end NLP text classification project using the PubMed 20k RCT dataset.
+Built with a research-oriented workflow:
 
-This repo is designed to be understandable, reproducible, and interview-ready.
+EDA → Preprocessing → Classical Baseline → Transformer Model → Evaluation & Comparison
 
----
+This repository is designed to be reproducible, interpretable, and interview-ready, demonstrating applied machine learning for healthcare text.
 
-## What this project does
+📌 Project Goal
 
-Given a sentence from a medical abstract, the model predicts its section label:
+Given a sentence from a medical abstract, predict its section label:
 
-- **BACKGROUND**
-- **OBJECTIVE**
-- **METHODS**
-- **RESULTS**
-- **CONCLUSIONS**
+BACKGROUND
 
-Two model families are implemented and compared:
+OBJECTIVE
 
-1. **Baseline**: TF-IDF + Logistic Regression (fast, strong classical NLP baseline)
-2. **Transformer**: DistilBERT fine-tuning (context-aware model)
+METHODS
 
----
+RESULTS
 
-## Repository structure
+CONCLUSIONS
+
+This mirrors real clinical NLP tasks such as structuring medical literature and supporting evidence retrieval systems.
+
+🧠 Models Implemented
+🔹 Classical Baseline — TF-IDF + Logistic Regression
+
+Fast and interpretable
+
+Strong benchmark for medical text
+
+Captures vocabulary patterns and n-grams
+
+🔹 Transformer Model — DistilBERT Fine-Tuning
+
+Context-aware language understanding
+
+Improved overall accuracy and class stability
+
+Demonstrates modern NLP workflows
+
+📊 Key Results (Dev Set)
+Model	Accuracy	Objective F1	Notes
+TF-IDF + LogReg	~83%	0.62	Strong baseline, fast, interpretable
+DistilBERT	~87%	0.64	Better overall performance & stability
+🔎 Insights
+
+Transformers improved overall accuracy by ~4%.
+
+Largest confusion remained between OBJECTIVE and BACKGROUND.
+
+Baseline remained competitive due to structured medical vocabulary.
+
+🗂 Repository Structure
 
 .
 ├── artifacts/
@@ -74,79 +102,136 @@ Two model families are implemented and compared:
 ├── requirements.txt
 └── README.md
 
+🔄 Workflow
+1️⃣ Exploratory Data Analysis
 
+Verified dataset integrity and splits
 
----
+Examined class balance and text length distributions
 
-## Setup
+Confirmed consistent labels across splits
 
-1) Install dependencies
+2️⃣ Preprocessing
+
+Text normalization and cleaning
+
+Label consistency checks
+
+Prepared data for both classical ML and transformers
+
+3️⃣ Baseline Model
+
+TF-IDF feature extraction (unigrams + bigrams)
+
+Logistic Regression classifier
+
+Evaluated with accuracy, F1, and confusion matrix
+
+4️⃣ Transformer Model
+
+DistilBERT fine-tuning using Hugging Face
+
+Tokenization and attention masking
+
+GPU training (Google Colab)
+
+5️⃣ Evaluation & Comparison
+
+Per-class precision, recall, F1
+
+Confusion matrix analysis
+
+Baseline vs Transformer comparison tables
+
+⚙️ Setup
+1️⃣ Install dependencies
 pip install -r requirements.txt
 
-2) Download NLTK resources (run once)
-python -c "import nltk; nltk.download('stopwords'); nltk.download('wordnet'); nltk.download('omw-1.4'); n
+2️⃣ Download dataset
+Download PubMed 20k RCT and place files in:
+data/raw/pubmed_20k_rct/
+    train.txt
+    dev.txt
+    test.txt
+Dataset source: https://github.com/Franck-Dernoncourt/pubmed-rct
 
-3) Add the dataset
+▶️ How to Run
 
-Place the PubMed 20k RCT files here:
+Run notebooks in order:
 
-data/raw/pubmed_20k_rct/train.txt
-data/raw/pubmed_20k_rct/dev.txt
-data/raw/pubmed_20k_rct/test.txt
+01_eda.ipynb — dataset checks & exploration
 
+02_preprocessing.ipynb — cleaning & preparation
 
+03_baseline.ipynb — TF-IDF baseline
 
-## How to run (recommended)
+04_distilbert.ipynb — transformer training (Colab recommended)
 
-Open and run the notebooks in order:
+05_comparison.ipynb — model comparison & exports
 
-01_eda.ipynb — sanity checks, label distribution, text-length EDA
+All outputs are saved in artifacts/.
 
-02_preprocessing.ipynb — cleaning steps + label mapping checks
+📈 Evaluation Metrics
 
-03_baseline.ipynb — TF-IDF + Logistic Regression training + evaluation
-
-04_distilbert.ipynb — DistilBERT training + evaluation (recommended to run in Google Colab with GPU)
-
-05_comparison.ipynb — compares both models and exports comparison tables
-
-All key results are saved to artifacts/.
-
-
-## Evaluation approach
-
-For each model we compute:
+We evaluate using:
 
 Accuracy
 
-Per-class precision / recall / F1
+Precision / Recall / F1 (per class)
 
-Macro avg vs Weighted avg
+Macro vs Weighted averages
 
-Confusion matrix (to study label confusion patterns)
+Confusion matrix analysis
 
-A specific focus is the confusion between OBJECTIVE and BACKGROUND, because these sections can share overlapping vocabulary.
+Special focus: confusion between OBJECTIVE and BACKGROUND due to overlapping vocabulary.
 
-## Notes on baseline vs transformers
+🎯 Why This Project Matters
 
-- TF-IDF + Logistic Regression is fast, interpretable, and strong for structured scientific text.
-- DistilBERT captures contextual meaning and improves overall accuracy.
-- Transformers improve high-frequency classes but may not fully resolve OBJECTIVE vs BACKGROUND confusion.
-- This comparison highlights trade-offs between performance, cost, and interpretability.
+This project demonstrates:
 
+Applied NLP for healthcare
 
-## Author
+End-to-end ML pipeline design
+
+Model evaluation and error analysis
+
+Baseline vs transformer trade-offs
+
+Reproducible research workflow
+
+Relevant to:
+
+Clinical NLP research
+
+Medical AI systems
+
+Decision support tools
+
+Production ML pipelines
+
+🔮 Future Improvements
+
+Class weighting for OBJECTIVE vs BACKGROUND
+
+Biomedical transformers (BioBERT, PubMedBERT)
+
+Hyperparameter tuning
+
+Model deployment as an API
+
+👤 Author
 
 Mansour Hammour
-Computer Science & Medical student — building research-oriented ML/NLP projects for Healthcare AI.
+Computer Science & Medical Student
+Interested in AI for Healthcare, NLP, and Clinical Decision Support Systems
 
-LinkedIn: https://www.linkedin.com/in/mansour-hammour-776666324
+🔗 LinkedIn: https://www.linkedin.com/in/mansour-hammour-776666324
 
+🔗 GitHub: https://github.com/hammourmansour-creator
+
+📄 License
+
+Educational and research use.
 
 ---
-
-## Final push checklist (do this once, then push)
-1) Ensure dataset files are **NOT** committed (add to `.gitignore`):
-```txt
-data/raw/pubmed_20k_rct/
 
